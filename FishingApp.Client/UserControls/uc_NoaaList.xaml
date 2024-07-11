@@ -9,6 +9,12 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Name="View_Noaa_Bouy_List">
     <Grid>
+        <TextBlock Grid.Column="1"
+HorizontalAlignment="Center"
+VerticalAlignment="Center"
+AutomationProperties.Name="Material Design In XAML Toolkit"
+FontSize="22"
+Text="HELLO WORKD" />
         <ListView Name="lstNoaaLocations" Grid.Row="1" Background="Transparent" MinHeight="300" MaxHeight="600" Margin="5,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListView.ItemTemplate>
                 <DataTemplate>

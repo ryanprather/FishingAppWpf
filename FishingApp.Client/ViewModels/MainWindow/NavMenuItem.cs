@@ -16,8 +16,8 @@ namespace FishingApp.Client.ViewModels.MainWindow
         private readonly object? _dataContext;
 
         public string Name { get; }
-        public PackIconKind SelectedIcon;
-        public PackIconKind UnselectedIcon;
+        public PackIconKind SelectedIcon { get; }
+        public PackIconKind UnselectedIcon { get; }
         public object? Content => _content ??= CreateContent();
 
         public NavMenuItem(string name, Type contentType, PackIconKind selectedIcon, PackIconKind unselectedIcon, object? dataContext = null)

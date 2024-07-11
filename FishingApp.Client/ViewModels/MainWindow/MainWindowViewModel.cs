@@ -12,6 +12,7 @@ namespace FishingApp.Client.ViewModels.MainWindow
     {
         private NavMenuItem? _selectedItem;
         private int _selectedIndex;
+        private readonly string _localNamespace;
 
         public NavMenuItem? SelectedItem
         {
@@ -27,32 +28,46 @@ namespace FishingApp.Client.ViewModels.MainWindow
 
         public ObservableCollection<NavMenuItem> NavMenuItems { get; }
 
-        public MainWindowViewModel() 
+        public MainWindowViewModel(string localNamespace)
         {
+            _localNamespace = localNamespace;
             NavMenuItems = new ObservableCollection<NavMenuItem>();
-            var navitems = GetUserControls("FishingApp.Client");
+            var navitems = GetUserControls(_localNamespace);
             if (navitems == null) return;
-            foreach (var item in navitems) 
+            foreach (var item in navitems)
             {
                 NavMenuItems.Add(item);
             }
         }
 
 
-        public IEnumerable<NavMenuItem> GetUserControls(string searchNamespace) 
+        public IEnumerable<NavMenuItem> GetUserControls(string searchNamespace)
         {
-            return Assembly
+            var navList = new List<NavMenuItem>();
+
+            var definedUserControls = Assembly
                 .GetExecutingAssembly()
                 .GetTypes()
                 .Where(t => t.FullName.StartsWith(searchNamespace)
                     && typeof(UserControl).IsAssignableFrom(t))
-                .Select(t => (UserControl)Activator.CreateInstance(t))
-                .Select(x=> new NavMenuItem(
-                    name: x.Name.Replace("_", " "),
-                    contentType: x.GetType(),
-                    selectedIcon: PackIconKind.Home,
-                    unselectedIcon: PackIconKind.Home
+                .Select(t => (UserControl)Activator.CreateInstance(t));
+
+
+            foreach (var control in definedUserControls)
+            {
+                if (control is null) break;
+
+                var baseControl = (IBaseUserControl)control;
+
+                navList.Add(new NavMenuItem(
+                    name: control.Name.Replace("_", " "),
+                    contentType: control.GetType(),
+                    selectedIcon: baseControl.GetSelectedPackingIcon(),
+                    unselectedIcon: baseControl.GetUnselectedPackingIcon()
                     ));
+            }
+
+            return navList;
         }
 
 

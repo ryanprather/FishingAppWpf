@@ -1,4 +1,5 @@
-﻿using FishingApp.Client.ViewModels.MainWindow;
+﻿using FishingApp.Client.UserControls;
+using FishingApp.Client.ViewModels.MainWindow;
 using FishingApp.Storage.Context;
 using FishingApp.Storage.Service.NoaaService;
 using MaterialDesignThemes.Wpf;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 
 namespace FishingApp.Client
@@ -48,7 +50,7 @@ namespace FishingApp.Client
             var noaaQueryString = Configuration.GetConnectionString("NoaaQueryString"); 
 
             var serviceProvider = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
-            serviceProvider.AddScoped<IMainWindowViewModel, MainWindowViewModel>();
+            serviceProvider.AddScoped<IMainWindowViewModel>(s=> new MainWindowViewModel(typeof(uc_NoaaList).Namespace));
             serviceProvider.AddDbContext<FishingAppContext>(options => options.UseSqlite(databaseConnectionString));
             serviceProvider.AddScoped<INoaaQueryService>(s => new NoaaQueryService(noaaLocation, noaaQueryString));
             serviceProvider.AddScoped<MainWindow>();

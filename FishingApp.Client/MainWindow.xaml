@@ -191,20 +191,23 @@
                    VerticalAlignment="Top"
                    Stretch="Uniform">
                             <ListBox VerticalAlignment="Top"
-                     ItemsSource="{Binding MainDemoItems}"
+                     ItemsSource="{Binding NavMenuItems}"
                      SelectedValue="{Binding SelectedItem}">
                                 <ListBox.ItemContainerStyle>
                                     <Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesign3.NavigationRailPrimaryListBoxItem}">
-                                        <Setter Property="materialDesign:BadgedAssist.Badge" Value="{Binding Notifications}" />
                                         <Setter Property="materialDesign:BadgedAssist.BadgeBackground" Value="#930006" />
                                         <Setter Property="materialDesign:BadgedAssist.BadgeForeground" Value="#FFDAD4" />
                                         <Setter Property="materialDesign:NavigationRailAssist.IsTextVisible" Value="True" />
                                         <Setter Property="materialDesign:NavigationRailAssist.SelectedIcon" Value="{Binding SelectedIcon}" />
-                                        <Setter Property="materialDesign:NavigationRailAssist.UnselectedIcon" Value="{Binding UnselectedIcon}" />
+                                        <Setter Property="materialDesign:NavigationRailAssist.UnselectedIcon" Value="{Binding SelectedIcon}" />
                                     </Style>
                                 </ListBox.ItemContainerStyle>
                                 <ListBox.Resources>
-
+                                    <DataTemplate DataType="{x:Type domain:NavMenuItem}">
+                                        <TextBlock Text="{Binding Name}"
+                                             TextAlignment="Center"
+                                             TextWrapping="Wrap" />     
+                                    </DataTemplate>
                                 </ListBox.Resources>
                             </ListBox>
                         </Viewbox>
