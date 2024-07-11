@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="FishingApp.Client.UserControls.uc_NoaaList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:FishingApp.Client.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Name="View_Noaa_Bouy_List">
+    <Grid>
+        <ListView Name="lstNoaaLocations" Grid.Row="1" Background="Transparent" MinHeight="300" MaxHeight="600" Margin="5,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" >
+                        <StackPanel Orientation="Horizontal" Margin="20">
+                            <Image Height="30" Width="30" Source="../Assets/buoyIcon.png" Margin="0,0,20,0"/>
+                            <StackPanel Background="Transparent" Height="60" Width="250" Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                    <TextBlock Text ="{Binding LocationId}" FontSize="25" FontStyle="Oblique" TextWrapping="Wrap" VerticalAlignment="Stretch" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,10,10">
+                            <TextBlock Text ="Name:" Width="100" FontWeight="Bold" VerticalAlignment="Center" />
+                            <TextBlock Text ="{Binding Name}" TextWrapping="Wrap" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,10,10">
+                            <TextBlock Text ="Type:" Width="100" FontWeight="Bold" VerticalAlignment="Center" />
+                            <TextBlock Text ="{Binding Type}" TextWrapping="Wrap" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </StackPanel>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</UserControl>
