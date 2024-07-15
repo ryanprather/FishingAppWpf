@@ -4,6 +4,6 @@ namespace FishingApp.Storage.Service.NoaaService
 {
     public interface INoaaQueryService
     {
-        Task<IEnumerable<NOAALocation>> GetNoaaActiveLocations();
+        IEnumerable<NOAALocation> GetNoaaActiveLocations();
     }
 }

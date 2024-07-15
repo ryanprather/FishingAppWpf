@@ -5,40 +5,84 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:FishingApp.Client.UserControls"
+             xmlns:domain="clr-namespace:FishingApp.Client.ViewModels.NoaaList"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             Name="View_Noaa_Bouy_List">
+             d:DataContext="{d:DesignInstance domain:NoaaListViewModel}"
+             d:DesignHeight="450" d:DesignWidth="800" Name="Noaa_List" Loaded="View_Noaa_Bouy_List_Loaded">
     <Grid>
-        <TextBlock Grid.Column="1"
-HorizontalAlignment="Center"
-VerticalAlignment="Center"
-AutomationProperties.Name="Material Design In XAML Toolkit"
-FontSize="22"
-Text="HELLO WORKD" />
-        <ListView Name="lstNoaaLocations" Grid.Row="1" Background="Transparent" MinHeight="300" MaxHeight="600" Margin="5,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <!--<ListView Name="lstNoaaLocations" Grid.Row="1" 
+    Background="Transparent" 
+    MinHeight="300" MaxHeight="600"
+    ItemsSource="{Binding BouyLocations}"
+    ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate DataType="{x:Type domain:BouyListItem}">
                     <StackPanel Orientation="Vertical" >
-                        <StackPanel Orientation="Horizontal" Margin="20">
-                            <Image Height="30" Width="30" Source="../Assets/buoyIcon.png" Margin="0,0,20,0"/>
-                            <StackPanel Background="Transparent" Height="60" Width="250" Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Background="Transparent" Height="30" MinWidth="250" Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                    <TextBlock Text ="{Binding LocationId}" FontSize="25" FontStyle="Oblique" TextWrapping="Wrap" VerticalAlignment="Stretch" />
+                                    <TextBlock Text ="{Binding Name}" FontSize="20" FontStyle="Oblique" TextWrapping="Wrap" VerticalAlignment="Stretch" />
                                 </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0,0,10,10">
-                            <TextBlock Text ="Name:" Width="100" FontWeight="Bold" VerticalAlignment="Center" />
-                            <TextBlock Text ="{Binding Name}" TextWrapping="Wrap" VerticalAlignment="Center" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,10,10">
                             <TextBlock Text ="Type:" Width="100" FontWeight="Bold" VerticalAlignment="Center" />
                             <TextBlock Text ="{Binding Type}" TextWrapping="Wrap" VerticalAlignment="Center" />
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,10,10">
+                            <TextBlock Text ="Lat:" Width="100" FontWeight="Bold" VerticalAlignment="Center" />
+                            <TextBlock Text ="{Binding Latitude}" TextWrapping="Wrap" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,10,10">
+                            <TextBlock Text ="Long:" Width="100" FontWeight="Bold" VerticalAlignment="Center" />
+                            <TextBlock Text ="{Binding Longitude}" TextWrapping="Wrap" VerticalAlignment="Center" />
+                        </StackPanel>
                     </StackPanel>
-
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesign3.NavigationRailPrimaryListBoxItem}">
+                    <Setter Property="materialDesign:BadgedAssist.BadgeBackground" Value="#930006" />
+                    <Setter Property="materialDesign:BadgedAssist.BadgeForeground" Value="#FFDAD4" />
+                    <Setter Property="materialDesign:NavigationRailAssist.IsTextVisible" Value="True" />
+                    <Setter Property="materialDesign:NavigationRailAssist.SelectedIcon" Value="{Binding PackIcon}" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>-->
+
+        <ListView
+            ItemsSource="{Binding BouyLocations}" MaxHeight="650">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Name}" Width="400"
+                        Header="Name" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Latitude}"
+                        Header="Lat" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Longitude}"
+                        Header="Long" />
+                    <!--<GridViewColumn
+                        Header="Options">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox
+              Width="100">
+                                    <ComboBoxItem
+                Content="Test" />
+                                    <ComboBoxItem
+                Content="Test2" />
+                                    <ComboBoxItem
+                Content="Test3" />
+                                </ComboBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>-->
+                </GridView>
+            </ListView.View>
         </ListView>
+
+
     </Grid>
 </UserControl>

@@ -1,5 +1,11 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using FishingApp.Client.ViewModels.MainWindow;
+using FishingApp.Client.ViewModels.NoaaList;
+using MaterialDesignThemes.Wpf;
+using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace FishingApp.Client.UserControls
 {
@@ -8,9 +14,12 @@ namespace FishingApp.Client.UserControls
     /// </summary>
     public partial class uc_NoaaList : UserControl, IBaseUserControl
     {
-        public uc_NoaaList()
+        private readonly INoaaListViewModel _noaaListViewModel;
+        public uc_NoaaList(INoaaListViewModel noaaListViewModel)
         {
             InitializeComponent();
+            _noaaListViewModel = noaaListViewModel;
+            DataContext = _noaaListViewModel;
         }
 
         public PackIconKind GetSelectedPackingIcon()
@@ -22,5 +31,14 @@ namespace FishingApp.Client.UserControls
         {
             return PackIconKind.AccessPoint;
         }
+
+        private void View_Noaa_Bouy_List_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            _noaaListViewModel.LoadNoaaLocations();
+        }
+
+        
+
+
     }
 }

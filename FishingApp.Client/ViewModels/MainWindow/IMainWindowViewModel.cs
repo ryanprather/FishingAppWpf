@@ -8,7 +8,5 @@ using System.Windows.Controls;
 namespace FishingApp.Client.ViewModels.MainWindow
 {
     public interface IMainWindowViewModel
-    {
-        IEnumerable<NavMenuItem?> GetUserControls(string searchNamespace);
-    }
+    {    }
 }

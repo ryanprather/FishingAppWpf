@@ -1,5 +1,6 @@
 ﻿using FishingApp.Client.UserControls;
 using FishingApp.Client.ViewModels.MainWindow;
+using FishingApp.Client.ViewModels.NoaaList;
 using FishingApp.Storage.Context;
 using FishingApp.Storage.Service.NoaaService;
 using MaterialDesignThemes.Wpf;
@@ -7,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
-using System.Reflection;
 using System.Windows;
 
 namespace FishingApp.Client
@@ -19,22 +19,22 @@ namespace FishingApp.Client
     /// </summary>
     public partial class App : Application
     {
-        public IServiceProvider ServiceProvider { get; private set; }
 
         public IConfiguration Configuration { get; private set; }
-
+        public static IServiceProvider ServiceProvider { get; private set; }
         internal FlowDirection InitialFlowDirection { get; set; }
         internal BaseTheme InitialTheme { get; set; }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var serviceProvider = CreateServices();
-            using (var db = new FishingAppContext())
+            ServiceProvider = CreateServices();
+            using (var dbContext = ServiceProvider.GetRequiredService<FishingAppContext>()) 
             {
-                db.Database.Migrate();
+                dbContext.Database.EnsureCreated();
+                dbContext.Database.Migrate();
             }
-            
-            MainWindow mainWindow = serviceProvider.GetRequiredService<MainWindow>();
+
+            MainWindow mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
         }
 
@@ -49,13 +49,18 @@ namespace FishingApp.Client
             var noaaLocation = Configuration.GetConnectionString("NoaaActiveStations");
             var noaaQueryString = Configuration.GetConnectionString("NoaaQueryString"); 
 
-            var serviceProvider = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
-            serviceProvider.AddScoped<IMainWindowViewModel>(s=> new MainWindowViewModel(typeof(uc_NoaaList).Namespace));
-            serviceProvider.AddDbContext<FishingAppContext>(options => options.UseSqlite(databaseConnectionString));
-            serviceProvider.AddScoped<INoaaQueryService>(s => new NoaaQueryService(noaaLocation, noaaQueryString));
-            serviceProvider.AddScoped<MainWindow>();
+            var serviceCollection = new ServiceCollection();
+            
+            serviceCollection.AddDbContext<FishingAppContext>(options => options.UseSqlite(databaseConnectionString));
+            serviceCollection.AddScoped<INoaaQueryService>(s => new NoaaQueryService(noaaLocation, noaaQueryString));
+            
+            serviceCollection.AddScoped<INoaaListViewModel, NoaaListViewModel>();
+            serviceCollection.AddScoped<IMainWindowViewModel>(s => new MainWindowViewModel(typeof(uc_NoaaList).Namespace));
+            serviceCollection.AddScoped<MainWindow>();
+            serviceCollection.AddScoped<uc_NoaaList>();
+            serviceCollection.AddScoped<uc_Dashboard>();
 
-            return serviceProvider.BuildServiceProvider();
+            return serviceCollection.BuildServiceProvider();
         }
     }
 

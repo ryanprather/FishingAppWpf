@@ -1,6 +1,7 @@
 ﻿using FishingApp.Client.UserControls;
 using FishingApp.Client.ViewModels.Abstract;
 using MaterialDesignThemes.Wpf;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Windows.Controls;
@@ -32,6 +33,7 @@ namespace FishingApp.Client.ViewModels.MainWindow
         {
             _localNamespace = localNamespace;
             NavMenuItems = new ObservableCollection<NavMenuItem>();
+            
             var navitems = GetUserControls(_localNamespace);
             if (navitems == null) return;
             foreach (var item in navitems)
@@ -50,7 +52,7 @@ namespace FishingApp.Client.ViewModels.MainWindow
                 .GetTypes()
                 .Where(t => t.FullName.StartsWith(searchNamespace)
                     && typeof(UserControl).IsAssignableFrom(t))
-                .Select(t => (UserControl)Activator.CreateInstance(t));
+                .Select(t => (UserControl)App.ServiceProvider.GetRequiredService(t));
 
 
             foreach (var control in definedUserControls)

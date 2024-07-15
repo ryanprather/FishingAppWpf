@@ -1,11 +1,12 @@
 ﻿using FishingApp.Storage.Context;
 using FishingApp.Storage.Service.NoaaService.Models;
 using System.Data;
+using System.Net;
 using System.Xml.Linq;
 
 namespace FishingApp.Storage.Service.NoaaService
 {
-    public class NoaaQueryService: INoaaQueryService
+    public class NoaaQueryService : INoaaQueryService
     {
         private readonly string _connectionString;
         private readonly string _webServiceQueryString;
@@ -16,15 +17,21 @@ namespace FishingApp.Storage.Service.NoaaService
             _webServiceQueryString = webServiceQueryString;
         }
 
-        public async Task<IEnumerable<NOAALocation>> GetNoaaActiveLocations()
+        public IEnumerable<NOAALocation> GetNoaaActiveLocations()
         {
             var stations = new List<NOAALocation>();
             var client = new HttpClient();
-            var response = await client.GetStreamAsync(_connectionString);
-            XDocument xmlDoc = XDocument.Load(response);
+            var task = Task.Run(() => client.GetStreamAsync(_connectionString));
+            task.Wait();
+            var results = task.Result;
+            XDocument xmlDoc = XDocument.Load(results);
             foreach (var xmlStation in xmlDoc.Descendants("station"))
             {
-                if (xmlStation != null && xmlStation.Attribute("met") != null && xmlStation.Attribute("met").Value == "y")
+                if (xmlStation != null
+                    && xmlStation.Attribute("met") != null
+                    && xmlStation.Attribute("met").Value == "y"
+                    && xmlStation.Attribute("name").Value.ToLower() != "n/a"
+                    && xmlStation.Attribute("type").Value.ToLower() == "buoy")
                 {
                     var station = new NOAALocation()
                     {

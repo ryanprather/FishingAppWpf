@@ -3,6 +3,7 @@ using MaterialDesignThemes.Wpf;
 using Prism.Mvvm;
 using System.Windows.Controls;
 using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FishingApp.Client.ViewModels.MainWindow
 {
@@ -49,7 +50,7 @@ namespace FishingApp.Client.ViewModels.MainWindow
 
         private object? CreateContent()
         {
-            var content = Activator.CreateInstance(_contentType);
+            var content = (UserControl)App.ServiceProvider.GetRequiredService(_contentType);
             if (_dataContext != null && content is FrameworkElement element)
             {
                 element.DataContext = _dataContext;

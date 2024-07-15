@@ -53,12 +53,6 @@ namespace FishingApp.Client
 
         }
 
-        public void BuildSideMenuActionList()
-        {
-            //var test = _mainWindowViewModel.GetUserControls(this.GetType().Namespace);
-            //var ass = test.First().Name;
-        }
-
         
 
         private void MenuOpen_Click(object sender, RoutedEventArgs e)
@@ -98,24 +92,16 @@ namespace FishingApp.Client
             }
         }
 
-        private async void MenuPopupButton_OnClick(object sender, RoutedEventArgs e)
-        {
-
-            //var sampleMessageDialog = new MetroWindow().ShowMessageAsync()
-            //{
-            //    Show = { Text = ((ButtonBase)sender).Content.ToString() }
-            //};
-
-            //await DialogHost.Show(sampleMessageDialog, "RootDialog");
-        }
-
         private void FlowDirectionButton_Click(object sender, RoutedEventArgs e)
         => FlowDirection = FlowDirectionToggleButton.IsChecked.GetValueOrDefault(false)
             ? FlowDirection.RightToLeft
             : FlowDirection.LeftToRight;
 
         private void OnSelectedItemChanged(object sender, DependencyPropertyChangedEventArgs e)
-        => MainScrollViewer.ScrollToHome();
+        {
+            var ass = sender;
+            MainScrollViewer.ScrollToHome();
+        }
 
         private void MenuDarkModeButton_Click(object sender, RoutedEventArgs e)
         => ModifyTheme(DarkModeToggleButton.IsChecked == true);
