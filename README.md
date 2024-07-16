@@ -1,14 +1,45 @@
 # Fishing GPS Application
 
-## Description
-   - This Application is used to view and store GPS locations for fishing locations.
-
-## Come Up with a Title
+## Overview
 <details>
-  <summary>Pages and Actions</summary>
+  <summary>Overview</summary>
 
-  ### Pages
-  1. Dashboard
-  2. Noaa Bouy List
-  3. Manage Fishing Locations
-</details>  
+### Logging
+ TODO:// setup logging and add documentation
+
+### Storage
+  This project uses ***SQlite*** as a database. The database is created and migrated when the project is started up each time. EntityFramwork is used to manage migrations and database changes
+
+### Project Setup
+
+</details>
+ 
+
+## Pages and Actions
+<details>
+  <summary>Page List</summary>
+  
+  ### Dashboard
+  TODO:// create mock-ups and descriptions
+  
+  ### Noaa Bouy List
+  ![noaa boy list image](./img/nooa_search-list.png)
+  The Noaa Bouy List page pulls bouy locations from the Noaa Active Stations xml webpage. The list is filtered for bouys that have names.
+
+  TODO://  Add Search functionality to Grid Veiw and documentation 
+
+  Revelant Links:
+   - [Noaa XML List](http://www.ndbc.noaa.gov/activestations.xml)
+
+
+  ### Manage Locations
+  TODO:// create mock-ups and descriptions
+ 
+</details>
+
+
+
+
+
+
+

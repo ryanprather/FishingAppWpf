@@ -30,6 +30,7 @@ namespace FishingApp.Storage.Service.NoaaService
                 if (xmlStation != null
                     && xmlStation.Attribute("met") != null
                     && xmlStation.Attribute("met").Value == "y"
+                    && xmlStation.Attribute("name").Value != String.Empty
                     && xmlStation.Attribute("name").Value.ToLower() != "n/a"
                     && xmlStation.Attribute("type").Value.ToLower() == "buoy")
                 {
@@ -38,7 +39,7 @@ namespace FishingApp.Storage.Service.NoaaService
                         LocationId = (xmlStation.Attribute("id") != null && xmlStation.Attribute("id").Value != null) ? xmlStation.Attribute("id").Value : "",
                         Latitude = (xmlStation.Attribute("lat") != null && xmlStation.Attribute("lat").Value != null) ? double.Parse(xmlStation.Attribute("lat").Value) : 0,
                         Longitude = (xmlStation.Attribute("lon") != null && xmlStation.Attribute("lon").Value != null) ? double.Parse(xmlStation.Attribute("lon").Value) : 0,
-                        Name = (xmlStation.Attribute("name") != null && xmlStation.Attribute("name").Value != null && xmlStation.Attribute("name").Value != String.Empty) ? xmlStation.Attribute("name").Value : "N/A",
+                        Name = xmlStation.Attribute("name").Value,
                         Type = (xmlStation.Attribute("type") != null && xmlStation.Attribute("type").Value != null && xmlStation.Attribute("type").Value != String.Empty) ? xmlStation.Attribute("type").Value : "N/A",
                     };
                     stations.Add(station);

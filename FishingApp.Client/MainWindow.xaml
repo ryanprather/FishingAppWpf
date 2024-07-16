@@ -19,10 +19,6 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <!-- data template used for the dialogs example, defines a View for a ViewModel of type DateTime -->
-
-
             <materialDesign:BooleanToVisibilityConverter x:Key="InverseBoolToVisConverter"
                                              FalseValue="Visible"
                                              TrueValue="Collapsed" />
@@ -123,7 +119,7 @@
                      VerticalAlignment="Center"
                      AutomationProperties.Name="Material Design In XAML Toolkit"
                      FontSize="22"
-                     Text="Fishing App Dashboard" />
+                     Text="Fishing GPS Recorder" />
 
                         <materialDesign:PopupBox Grid.Column="2"
                                    PlacementMode="BottomAndAlignRightEdges"
