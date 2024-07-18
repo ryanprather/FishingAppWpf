@@ -20,7 +20,8 @@
   <summary>Page List</summary>
   
   ### Dashboard
-  TODO:// create mock-ups and descriptions
+  ![noaa boy list image](./img/dashboard.png)
+  The Dasboard page will display the saved bouy locations and will allow a refresh of the data. The Dashboard will also display the 5 most recent notes created.
   
   ### Noaa Bouy List
   ![noaa boy list image](./img/nooa_search-list.png)

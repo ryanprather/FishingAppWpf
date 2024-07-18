@@ -4,10 +4,215 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FishingApp.Client.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              Name="Dashboard"
              d:DesignHeight="450" d:DesignWidth="800">
+            <UserControl.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Card.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Popupbox.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </UserControl.Resources>
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Margin="16,16,16,4"
+            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+            Text="Bouys" TextWrapping="WrapWithOverflow"/>
+        <Separator Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignLightSeparator}" />
+
+        <materialDesign:Card
+            Width="200"
+            Margin="10"
+            Background="#03a9f4"
+            Grid.Row="2"
+            Grid.Column="0"
+            Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Margin="16,16,16,4"
+                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                    Text="Bouy 14" />
+                <Separator
+                    Grid.Row="1"
+                    Style="{StaticResource MaterialDesignLightSeparator}" />
+                <TextBlock
+                  Grid.Row="2"
+                  Margin="16,0,16,8"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Style="{StaticResource MaterialDesignBody2TextBlock}"
+                  Text="Wave Height: 3 ft." />
+                <TextBlock
+                    Grid.Row="3"
+                    Margin="16,0,16,8"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource MaterialDesignBody2TextBlock}"
+                    Text="Wave Period: 1sec." />
+                <StackPanel
+                      Grid.Row="3"
+                      Margin="16,0,16,8"
+                      HorizontalAlignment="Right"
+                      Orientation="Horizontal">
+                    <Button
+                        Width="30"
+                        Padding="2,0,2,0"
+                        HorizontalAlignment="Right"
+                        materialDesign:RippleAssist.IsCentered="True"
+                        Style="{StaticResource MaterialDesignToolForegroundButton}">
+                        <materialDesign:PackIcon Kind="Refresh" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card
+            Width="200"
+            Margin="10"
+            Background="#03a9f4"
+            Grid.Row="2"
+            Grid.Column="1"
+            Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock
+            Grid.Row="0"
+            Margin="16,16,16,4"
+            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+            Text="Pensacola Bouy 15" TextWrapping="WrapWithOverflow"/>
+                <Separator
+            Grid.Row="1"
+            Style="{StaticResource MaterialDesignLightSeparator}" />
+                <TextBlock
+          Grid.Row="2"
+          Margin="16,0,16,8"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Style="{StaticResource MaterialDesignBody2TextBlock}"
+          Text="Wave Height: 1 ft." />
+                <TextBlock
+            Grid.Row="3"
+            Margin="16,0,16,8"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Style="{StaticResource MaterialDesignBody2TextBlock}"
+            Text="Wave Period: 6sec." />
+                <StackPanel
+              Grid.Row="3"
+              Margin="16,0,16,8"
+              HorizontalAlignment="Right"
+              Orientation="Horizontal">
+                    <Button
+                Width="30"
+                Padding="2,0,2,0"
+                HorizontalAlignment="Right"
+                materialDesign:RippleAssist.IsCentered="True"
+                Style="{StaticResource MaterialDesignToolForegroundButton}">
+                        <materialDesign:PackIcon Kind="Refresh" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card
+            Width="200"
+            Margin="10"
+            Background="#03a9f4"
+            Grid.Row="2"
+            Grid.Column="2"
+            Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                Grid.Row="0"
+                Margin="16,16,16,4"
+                Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                Text="Bouy 78" TextWrapping="WrapWithOverflow"/>
+                <Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+                <TextBlock
+                    Grid.Row="2"
+                    Margin="16,0,16,8"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource MaterialDesignBody2TextBlock}"
+                    Text="Wave Height: 6 ft." />
+                <TextBlock
+                    Grid.Row="3"
+                    Margin="16,0,16,8"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource MaterialDesignBody2TextBlock}"
+                    Text="Wave Period: 7sec." />
+                <StackPanel
+                      Grid.Row="3"
+                      Margin="16,0,16,8"
+                      HorizontalAlignment="Right"
+                      Orientation="Horizontal">
+                    <Button
+                        Width="30"
+                        Padding="2,0,2,0"
+                        HorizontalAlignment="Right"
+                        materialDesign:RippleAssist.IsCentered="True"
+                        Style="{StaticResource MaterialDesignToolForegroundButton}">
+                        <materialDesign:PackIcon Kind="Refresh" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+
+        <TextBlock
+            Grid.Row="3"
+            Margin="16,16,16,4"
+            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+            Text="Recent Notes" TextWrapping="WrapWithOverflow"/>
+        <Separator Grid.Row="4" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignLightSeparator}" />
+        <ListView
+            Grid.Row="5" Grid.ColumnSpan="3"
+            ItemsSource="{Binding BouyLocations}" MaxHeight="650" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding LocationName}" Header="Location" Width="200" />
+                    <GridViewColumn DisplayMemberBinding="{Binding NoteText}" Header="Note" Width="200"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding CreatedDateTime}" Header="Created Date Time" Width="200" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>

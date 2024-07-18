@@ -1,11 +1,6 @@
-﻿using FishingApp.Client.ViewModels.MainWindow;
-using FishingApp.Client.ViewModels.NoaaList;
+﻿using FishingApp.Client.ViewModels.NoaaList;
 using MaterialDesignThemes.Wpf;
-using System.ComponentModel;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 
 namespace FishingApp.Client.UserControls
 {
